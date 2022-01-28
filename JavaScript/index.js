@@ -103,9 +103,9 @@ arr2.sort(function(a, b) {
 console.log(arr2);
 
 var mahasiswa = {
-    nama : 'vincentius',
-    nim : 1301190221,
-    ip : [2.9, 3.1, 3.25],
+    nama : '',
+    nim : 0,
+    ip : [],
     ipk : function() {
         var total = 0;
         for (var i = 0; i < this.ip.length; i++) {
@@ -119,10 +119,42 @@ var mahasiswa = {
     },
     getNama : function() {
         return this.nama;
+    },
+
+    setNim : function(nim) {
+        this.nim = nim;
+    },
+    getNim : function() {
+        return this.nim;
+    },
+
+    setIp : function(arguments) {
+        for (var i = 0; i < arguments.length; i++) {
+            this.ip.push(arguments[i]);
+        }
+    },
+    getIp : function() {
+        return this.ip;
     }
 }
 
-console.log(mahasiswa);
-console.log(mahasiswa.ipk());
-mahasiswa.setNama("parjo");
-console.log(mahasiswa.getNama());
+function create(nama, nim, ip) {
+    mahasiswa.setNama(nama);
+    mahasiswa.setNim(nim);
+    mahasiswa.setIp(ip);
+    return mahasiswa;
+}
+
+var mhs = create("parjo", 1301190221, [2.9, 3.1, 3.25, 4]);
+console.log(mhs.getNama());
+console.log(mhs.ipk());
+
+
+function Mahasiswa(nama, nim, ip) {
+    this.nama = nama;
+    this.ip = ip;
+    this.nim = nim;
+}
+
+var mhs2 = new Mahasiswa("hebat", 1301190221, [2.9, 3.1, 3.25, 4])
+console.log(mhs2);
