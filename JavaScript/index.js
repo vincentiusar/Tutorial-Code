@@ -11,6 +11,9 @@ console.log(str);
 console.log("str.length");
 console.log(str.length);
 
+console.log("str[0]");
+console.log(str[0]);
+
 console.log("\"10\" + 10 + 10");
 console.log("10" + 10 + 10);
 console.log("10 + 10 + \"10\"");
