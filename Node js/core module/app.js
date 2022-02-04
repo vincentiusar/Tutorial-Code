@@ -26,6 +26,16 @@ const rl = readline.createInterface( {
 } );
 
 rl.question('Nama anda : ', (nama) => {
-    console.log(`thanx ${nama}`);
-    rl.close();
+    rl.question('Nomor hape : ', (no) => {
+        const contact = { nama, no };
+        console.log(`thanks ${nama}, your number ${no}`);
+
+        const file = fs.readFileSync('export/contacts.json', 'utf-8');
+        const contacts = JSON.parse(file);
+
+        contacts.push(contact);
+
+        fs.writeFileSync('export/contacts.json', JSON.stringify(contacts));
+        rl.close();
+    })
 } )
