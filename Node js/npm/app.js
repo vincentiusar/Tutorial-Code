@@ -9,6 +9,6 @@ cout(validator.isNumeric('09892'));
 
 cout(chalk.bold.black.bgBlue("Hello world"));
 
-const nama = "vincentius";
+const nama = "Nathan";
 const pesan = chalk`hello {bgRed.blue.strikethrough work}, hello {bgGreen world}. nama saya ${nama}`;
 cout(chalk(pesan));
