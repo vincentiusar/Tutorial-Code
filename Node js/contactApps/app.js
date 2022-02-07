@@ -1,5 +1,7 @@
 const contacts = require('./contact.js');
 const yargs = require('yargs');
+const chalk = require('chalk');
+const { argv } = require('yargs');
 
 // can be written as
 // const contacts { Question, save } = require('./contact.js');
@@ -21,6 +23,7 @@ const main = async() => {
 //     console.log(argv.nama);
 // })
 
+// add contact
 yargs.command({
     command: 'add',
     describe: 'add new contact',
@@ -50,9 +53,10 @@ yargs.command({
         }
         contacts.save(contact);
     },
-})
+}).demandCommand();
 // node app add help
 
+// CLI input
 yargs.command({
     command: 'manual',
     describe: 'manually add new contact',
@@ -60,6 +64,48 @@ yargs.command({
     handler() {
         main();
     },
+})
+
+// show list
+yargs.command({
+    command: 'list',
+    describe: 'Show All List Contact',
+    builder: {},
+    handler() {
+        console.log(chalk.bgCyan.black('Daftar Contact'));
+        contacts.listContact();
+    }
+})
+
+// show detail of contact on name
+yargs.command({
+    command: 'detail',
+    describe: 'show detail of contact based on name',
+    builder: {
+        nama: {
+            describe: 'Nama',
+            demandOption: true,
+            type: 'string',
+        }
+    },
+    handler(argv) {
+        contacts.detailContact(argv.nama);
+    }
+})
+
+yargs.command({
+    command: 'remove',
+    describe: 'delete data berdasarkan noHP',
+    builder: {
+        noHP: {
+            describe: 'Nama',
+            demandOption: true,
+            type: 'string',
+        }
+    },
+    handler(argv) {
+        contacts.deleteContact(argv.noHP);
+    }
 })
 
 yargs.parse();

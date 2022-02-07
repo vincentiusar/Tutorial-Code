@@ -42,10 +42,66 @@ const Question = (argument) => {
     });
 }
 
-const save = (contact) => {
+const listContact = function() {
+    const contacts = loadFile();
+    contacts.forEach((contact, i) => {
+        console.log(`${i+1}. ${contact.nama} - ${contact.noHP}`);
+    })
+}
 
+const detailContact = function(nama) {
+    const contacts = loadFile();
+
+    // find module
+    // const contact = contacts.find((contact) => contact.nama === nama)
+
+    let found = false;
+    for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i].nama.toLowerCase() === nama.toLowerCase()) {
+            console.log(`${contacts[i].nama} - ${contacts[i].email} - ${contacts[i].noHP}`); 
+            found = true; 
+        }
+    }
+
+    if (!found) console.log(chalk.bgRed.black('Data not Found'));
+}
+
+const deleteContact = function(noHP) {
+    let contacts = loadFile();
+
+    // filter
+    // const newData = contacts.filter((contact) => contact.noHP !== noHP);
+
+    let data = [];
+    let found = false;
+    for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i].noHP !== noHP) {
+            data.push(contacts[i]);
+        } else if (contacts[i].noHP === noHP) found = true;
+    }
+
+    if (!found) {
+        console.log(chalk.bgRed.black('Data not Found'));
+        return;
+    }
+
+    console.log(chalk.bgCyanBright.black('Data Removed'));
+    fs.writeFileSync('data/contacts.json', JSON.stringify(data));
+}
+
+const loadFile = function() {
     const file = fs.readFileSync('data/contacts.json');
     const contacts = JSON.parse(file);
+    return contacts;
+}
+
+const save = (contact) => {
+    
+    // to loadFile func
+    // const file = fs.readFileSync('data/contacts.json');
+    // const contacts = JSON.parse(file);
+
+    const contacts = loadFile();
 
     // duplicate check
     let dupli = false;
@@ -58,20 +114,17 @@ const save = (contact) => {
     if (contact.email != '') {
         if (!validator.isEmail(contact.email)) {
             console.log(chalk.bgRed.black('Not a Valid Email'));
-            rl.close();
             return false;
         }
     }
 
     if (!validator.isMobilePhone(contact.noHP, 'id-ID')) {
         console.log(chalk.bgRed.black('Not a Valid Phone Number'));
-            rl.close();
             return false;
     }
 
     if (dupli) {
         console.log(chalk.bgRed.black('Nomor sudah ada'));
-        rl.close();
         return false;
     } else {
         console.log(chalk.bgBlue.black(`thanks ${contact.nama}, your number ${contact.noHP}, your mail ${contact.email}`));  
@@ -83,6 +136,7 @@ const save = (contact) => {
     rl.close();
 } 
 
+rl.close();
 // callback hell
 // rl.question('Nama anda : ', (nama) => {
 //     rl.question('Nomor hape : ', (no) => {
@@ -110,4 +164,7 @@ const save = (contact) => {
 module.exports = {
     Question,
     save,
+    listContact,
+    detailContact,
+    deleteContact,
 }
