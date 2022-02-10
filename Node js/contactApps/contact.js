@@ -167,4 +167,5 @@ module.exports = {
     listContact,
     detailContact,
     deleteContact,
+    loadFile
 }

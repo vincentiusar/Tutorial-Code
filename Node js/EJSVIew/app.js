@@ -11,6 +11,7 @@ app.get('/', function(req, res) {
         nama: "Saya",
         umur: "sehat",
     });
+    // res.sendFile('./semutsialan.gif', {root : __dirname});
 })
 
 app.get('/index', function(req, res) {
@@ -46,6 +47,6 @@ app.use((req, res) => {
     res.send('<h1>Error: page not found</h1>');
 })
 
-app.listen(port, function() {
+app.listen(port, '127.0.0.1', function() {
     console.log('app listening port 3000');
 })
