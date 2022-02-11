@@ -11,7 +11,10 @@
                     <h5 class="card-title"><%= contacts.nama %> </h5>
                     <h6 class="card-subtitle mb-2 text-muted"> <%= contacts.noHP %></h6>
                     <p class="card-text"><%= contacts.email %></p>
-                    <a href="/contact" class="card-link">&laquo; back to list contact</a>
+                    <a href="/contact/edit/<%= contacts.noHP %>" class="btn btn-info badge"> edit </a>
+                    <a href="/contact/delete/<%= contacts.noHP %>" class="btn btn-danger badge" onclick="return confirm('are you sure?');"> delete </a>
+                    <!-- on click untuk konfirmasi -->
+                    <a href="/contact" class="card-link d-block mt-3">&laquo; back to list contact</a>
                     
                     </div>
                 </div>

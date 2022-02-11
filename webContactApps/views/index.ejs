@@ -2,18 +2,24 @@
 <%- include('layouts/nav') %> 
 
     <!-- <% const nama = 'vincentius'%> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Hello World</h1>
+                <p>Cek</p>
+                <h2>Hello <%= nama%></h2>
 
-    <h1>Hello World</h1>
-    <p>Cek</p>
-    <h2>Hello <%= nama%></h2>
-
-    <h3>Daftar mahasiswa</h3>
-    <% if (mahasiswa.length === 0) %> <p>Mahasiswa kosong</p> 
-    <% for (let i = 0; i < mahasiswa.length; i++) { %> 
-    <ul>
-        <li>Nama : <%= mahasiswa[i].nama %></li>
-        <li>Nim : <%= mahasiswa[i].nim %></li>
-    </ul>
-    <% } %>
+                <h3>Daftar mahasiswa</h3>
+                <% if (mahasiswa.length === 0) %> <p>Mahasiswa kosong</p> 
+                <% for (let i = 0; i < mahasiswa.length; i++) { %> 
+                <ul>
+                    <li>Nama : <%= mahasiswa[i].nama %></li>
+                    <li>Nim : <%= mahasiswa[i].nim %></li>
+                </ul>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
